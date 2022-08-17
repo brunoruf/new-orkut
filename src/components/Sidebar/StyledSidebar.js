@@ -36,6 +36,7 @@ export const StyledSidebar = styled.aside`
         font-weight: 600;
         background: #fafafc;
         border-left: 4px solid #d744b6;
+        padding: 1.5rem 28px;
     }
 
     @media(min-width: 860px) {

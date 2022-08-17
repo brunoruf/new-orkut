@@ -14,8 +14,18 @@ export const StyledStructure = styled.div`
 
     .moods {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
+        justify-content: left;
         margin-top: 1rem;
+    }
+
+    .profile-infos {
+        display: flex;
+        margin-bottom: 1rem;
+    }
+
+    .profile-ratings {
+        display: flex;
     }
 
     .fortune-cookie {

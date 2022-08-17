@@ -7,5 +7,6 @@ export const StyledTextField = styled.input`
     border-radius: .4rem;
     box-sizing: border-box;
     padding: 1rem;
+    margin-bottom: .5rem;
     color: rgba(89, 84, 103, .8);
 `;

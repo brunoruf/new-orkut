@@ -9,10 +9,21 @@ import ProfileRatings from '../src/components/ProfileRatings/ProfileRatings.js'
 import FriendThumb from '../src/components/FriendThumb/FriendThumb.js'
 import CommunityThumb from '../src/components/CommunityThumb/CommunityThumb.js'
 import NewAction from '../src/components/NewAction/newAction.js'
+import { useState } from 'react'
 
 const githubUser = 'brunoruf'
 
+let communities = [
+  {name:'Odeio o Corinthians', image:'http://github.com/rafaballerini.png'},
+  {name:'Odeio o São Paulo', image:'http://github.com/omariosouto.png'},
+  {name:'Odeio o Santos', image:'http://github.com/peas.png'},
+]
+
+
 export default function Home() {
+  
+  const [myCommunities, setMyCommunities] = useState([...communities]);
+  
   return (
     <div>
       <Head>
@@ -26,16 +37,20 @@ export default function Home() {
                 <div style={{gridArea: 'welcomeArea'}}>
                     <Box>
                         <h3 className="hello">Hello, Bruno.</h3>
-                        <div className="fortune-cookie"><h5>Daily Fortune:</h5><p>Você vai chegar lá.</p></div>
+                        <div className="fortune-cookie"><h5>Daily Fortune:</h5><p>You will rock it!</p></div>
                         <div className="split-line"></div>
                         <div className="moods">
+                          <div className='profile-infos'>
                             <ProfileInfos name="Scraps" amount="15" image="https://img.icons8.com/fluency/344/mailbox-closed-flag-up.png"/>
                             <ProfileInfos name="Photos" amount="15" image="https://img.icons8.com/fluency/344/image.png"/>
                             <ProfileInfos name="Videos" amount="15" image="https://img.icons8.com/fluency/344/movie.png"/>
                             <ProfileInfos name="Fans" amount="15" image="https://img.icons8.com/fluency/344/popular-man.png"/>
+                          </div>
+                          <div className='profile-ratings'>
                             <ProfileRatings name="Trusty" amount="15" image="https://img.icons8.com/fluency/344/star.png" />
                             <ProfileRatings name="Cool" amount="15" image="https://img.icons8.com/fluency/344/cool.png"/>
                             <ProfileRatings name="Sexy" amount="15" image="https://img.icons8.com/fluency/344/like.png"/>
+                            </div>
                         </div>
                     </Box>
                     <Box>
@@ -66,10 +81,10 @@ export default function Home() {
                             <a>See All</a>
                         </div>
                         <div className="community-thumbs">
-                            <CommunityThumb name="Eu odeio acordar cedo"/>
-                            <CommunityThumb name="João Figueiredo"/>
-                            <CommunityThumb name="João Figueiredo"/>
-                            <CommunityThumb name="João Figueiredo"/>
+                          {myCommunities.map((community) => (
+                            <CommunityThumb name={community.name} image={community.image} key={community.name}/>
+                          ))}
+                            
                         </div>
                     </Box>
                   </div>

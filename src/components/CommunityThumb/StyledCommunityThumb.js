@@ -7,9 +7,9 @@ export const StyledCommunityThumb = styled.div`
     align-items: center;
 
     > span {
-        background: url("https://epipoca.com.br/wp-content/uploads/2022/08/samuel-l-jackson-garfield.jpg");
         background-repeat: no-repeat;
         background-size: cover;
+        background-position: center;
         border-radius: .4rem;
         width: 5rem;
         height: 3.5rem;

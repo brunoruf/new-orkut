@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const StyledProfileInfos = styled.div`
-    margin-right: 1rem;
+    margin-right: 1.5rem;
 
     > p {
         font-size: .8rem;

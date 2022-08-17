@@ -1,21 +1,64 @@
-import { Children } from "react";
-import Tab from "../tab/Tab";
-
+import Tab from "../Tab/Tab";
 import TextField from "../TextField/TextField";
 import { StyledNewAction } from "./StyledNewAction";
+import { useState } from "react";
+import Button from "../Button/Button";
+import {communities} from "../../../pages/index.js"
+        
+
+const NewAction = () => {
+    
+    const [newCommunityName, setnewCommunityName] = useState('')
+    const [newCommunityUrl, setnewCommunityUrl] = useState('')
+
+    const handlenewCommunityName = (e) => {
+        setnewCommunityName(e.target.value)
+    }
+    
+    const handlenewCommunityUrl = (e) => {
+        setnewCommunityUrl(e.target.value)
+    }
+
+    const handleFormSubmit = (e) => {
+        e.preventDefault()
+    }
 
 
-const NewAction = ({children}) => {
     return (
         <StyledNewAction>
                 <h2>What do you wanna do today?</h2>
                 <div className="split-line"></div>
                 <div className="tabs">
-                    <Tab name="Create a Community" active="active"/>
-                    <Tab name="Write a Testimonial"/>
-                    <Tab name="Leave a Scrap"/>
+                    <Tab 
+                        name="Create a Community"
+                        active="active"
+                    />
+                    <Tab
+                        name="New Testimonial"
+                    />
+                    <Tab
+                        name="New Scrap"
+                    />
                 </div>
-                <TextField placeholder="Give a name to you new community"/>
+                <form label="dawdwa" onSubmit={e => handleFormSubmit(e)}>
+                    <TextField
+                        name="new-community"
+                        placeholder="Give a name to you new community"
+                        required={true}
+                        label="Nome"
+                        onChange = {e => handlenewCommunityName(e)}
+                        value= {newCommunityName}
+                    />
+                        <TextField
+                        name="new-community-url"
+                        placeholder="Cover image URL"
+                        required={true}
+                        label="Cover Image"
+                        onChange = {e => handlenewCommunityUrl(e)}
+                        value= {newCommunityUrl}
+                    />
+                    <Button text="Create" />
+                </form>
         </StyledNewAction>
     )
 }
