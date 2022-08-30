@@ -7,7 +7,9 @@ export const StyledHeader = styled.header`
     align-items: center;
     padding: 2rem;
     background: #FFF;
-    box-shadow: 0px 4px 15px -3px rgba(0,0,0,0.01);
+    box-shadow: 0px 4px 15px -3px rgba(0,0,0,0.04);
+    position: fixed;
+    z-index:999;
 
     .header-container {
         display: flex;

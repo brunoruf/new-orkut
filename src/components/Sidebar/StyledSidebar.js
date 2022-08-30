@@ -1,9 +1,8 @@
 import styled from 'styled-components'
 
 export const StyledSidebar = styled.aside`
-    position: relative;
+
     width: 15rem;
-    height: calc(100vh - 5rem);
     display: flex;
     justify-content: space-between;
     padding: 1.5rem 0;
@@ -13,9 +12,12 @@ export const StyledSidebar = styled.aside`
     color: #706b81;
     background: #f2f2f5;;
     display: none;
+    margin-top: 5rem;
+    min-height: 100vh;
 
     ul {
         width: 100%;
+        position: fixed;
     }
 
     li {

@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 
 export const StyledMain = styled.main`
-
     width: 100%;
     grid-gap: 1.5rem;
     padding: 1.5rem ;
-
+    margin-top: 5rem;
 
     @media(min-width: 860px) {
         display: grid ;

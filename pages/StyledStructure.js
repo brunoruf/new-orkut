@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const StyledStructure = styled.div`
     display: flex ;
+    position: relative;
 
     section {
         margin-bottom: 1rem;

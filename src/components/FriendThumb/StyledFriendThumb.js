@@ -8,8 +8,13 @@ export const StyledFriendThumb = styled.div`
     justify-content: space-between;
     min-width: 50px;
     padding: .75rem;
+    border-radius: .4rem;
+    
+    :hover {
+        background: #faf7fa;
+    }
 
-    > img {
+     img {
         display:block ;
         border-radius: 8rem;
         width: 3.5rem;
@@ -19,7 +24,7 @@ export const StyledFriendThumb = styled.div`
         margin: 0 auto;
     }
 
-    > a {
+     p {
         margin-top: .5rem;
         font-size: .75rem;
         text-align: center;

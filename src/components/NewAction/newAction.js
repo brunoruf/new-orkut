@@ -3,10 +3,9 @@ import TextField from "../TextField/TextField";
 import { StyledNewAction } from "./StyledNewAction";
 import { useState } from "react";
 import Button from "../Button/Button";
-import {communities} from "../../../pages/index.js"
         
 
-const NewAction = () => {
+const NewAction = ({newCommunity}) => {
     
     const [newCommunityName, setnewCommunityName] = useState('')
     const [newCommunityUrl, setnewCommunityUrl] = useState('')
@@ -21,6 +20,7 @@ const NewAction = () => {
 
     const handleFormSubmit = (e) => {
         e.preventDefault()
+        newCommunity({title: newCommunityName, imageUrl:newCommunityUrl})  
     }
 
 

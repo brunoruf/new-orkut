@@ -9,11 +9,17 @@ import ProfileRatings from '../src/components/ProfileRatings/ProfileRatings.js'
 import FriendThumb from '../src/components/FriendThumb/FriendThumb.js'
 import CommunityThumb from '../src/components/CommunityThumb/CommunityThumb.js'
 import NewAction from '../src/components/NewAction/newAction.js'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const githubUser = 'brunoruf'
 
-let communities = [
+const communities = []
+
+
+let friends = [
+  {name:'Odeio o Corinthians', image:'http://github.com/rafaballerini.png'},
+  {name:'Odeio o São Paulo', image:'http://github.com/omariosouto.png'},
+  {name:'Odeio o Santos', image:'http://github.com/peas.png'},
   {name:'Odeio o Corinthians', image:'http://github.com/rafaballerini.png'},
   {name:'Odeio o São Paulo', image:'http://github.com/omariosouto.png'},
   {name:'Odeio o Santos', image:'http://github.com/peas.png'},
@@ -22,10 +28,58 @@ let communities = [
 
 export default function Home() {
   
-  const [myCommunities, setMyCommunities] = useState([...communities]);
+  const [myCommunities, setMyCommunities] = useState([]);
+   
+  useEffect(() => {
+    fetch('https://graphql.datocms.com/', {
+      method: 'POST',
+      headers: {
+        'Authorization': 'b6bd961ca358acd648647102ccf3e9',
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({"query": `query {
+          allCommunities {
+            id
+            title
+            _status
+            _firstPublishedAt
+            imageUrl
+            creatorSlug
+          }
+        }` })
+    })
+    .then(response => response.json())
+    .then(response => {
+      const communities = response.data.allCommunities
+      setMyCommunities(communities)
+      })
+  }, [])
+
+  const handleMyCommunities = (object) => {
+    const newCommunity = {
+        title: object.title,
+        imageUrl: object.imageUrl,
+      }
+
+      fetch('/api/communities', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newCommunity)
+      })
+      .then(async (res) => {
+        const data = res.json()
+        const newCommunity = data
+        setMyCommunities([...myCommunities, newCommunity])
+      })
+    }
   
+
+
   return (
-    <div>
+    <div className="wrapper">
       <Head>
         <title>New Orkut</title>
         <link rel="icon" href="/favicon.ico" />
@@ -54,14 +108,14 @@ export default function Home() {
                         </div>
                     </Box>
                     <Box>
-                        <NewAction />
+                        <NewAction newCommunity={object => handleMyCommunities(object)}/>
                     </Box>
                 </div>
                 <div style={{gridArea: 'profileRelationsArea'}}>
                   <div style={{gridArea: 'FriendsArea'}}>
                     <Box>
                         <div className="area-title">
-                            <h3>Friends</h3>
+                            <h3>Friends ({friends.length})</h3>
                             <a>See All</a>
                         </div>
                         <div className="friend-thumbs">
@@ -77,12 +131,12 @@ export default function Home() {
                   <div style={{gridArea: 'CommunitiesArea'}}>
                     <Box>
                         <div className="area-title">
-                            <h3>Communities</h3>
+                            <h3>Communities ({myCommunities.length})</h3>
                             <a>See All</a>
                         </div>
                         <div className="community-thumbs">
                           {myCommunities.map((community) => (
-                            <CommunityThumb name={community.name} image={community.image} key={community.name}/>
+                            <CommunityThumb name={community.title} image={community.imageUrl} key={community.id}/>
                           ))}
                             
                         </div>
